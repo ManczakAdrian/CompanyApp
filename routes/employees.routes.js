@@ -44,7 +44,9 @@ router.get('/employees/:id', (req, res) => {
 router.post('/employees', (req, res) => {
   const { firstName, lastName } = req.body;
   req.db.collection('employees')
-  .insertOne({ name: name })
+  .insertOne({ firstName: name })
+  .insertOne({ lastName: name })
+
   .then(() => {
     res.json({ message: 'OK' });
   })
