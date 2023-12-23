@@ -4,6 +4,8 @@ const express = require('express');
 const router = express.Router();
 const db = require('./../db');
 
+const ObjectId = require('mongodb').ObjectId;
+
 router.get('/products', (req, res) => {
   req.db.collection('products')
     .find()
@@ -18,7 +20,7 @@ router.get('/products', (req, res) => {
 });
 
 router.get('/products/random', (req, res) => {
-  req.db.collection('departments')
+  req.db.collection('products')
     .aggregate([{ $sample: { size: 1 } }])
     .toArray()
     .then((data) => {
@@ -46,7 +48,7 @@ router.get('/products/:id', (req, res) => {
 
 router.post('/products', (req, res) => {
   const { name, client } = req.body;
-  req.db.collection('departments')
+  req.db.collection('products')
   .insertOne({ name: name })
   .then(() => {
     res.json({ message: 'OK' });
@@ -60,7 +62,7 @@ router.post('/products', (req, res) => {
 
 router.put('/products/:id', (req, res) => {
   const { name, client } = req.body;
-  req.db.collection('departments')
+  req.db.collection('products')
   .updateOne({ _id: ObjectId(req.params.id) }, { $set: { name: name }})
   .then(() => {
     res.json({ message: 'OK' });
@@ -75,7 +77,7 @@ router.put('/products/:id', (req, res) => {
 
 router.delete('/products/:id', (req, res) => {
   const { name, client } = req.body;
-  req.db.collection('departments')
+  req.db.collection('products')
     .deleteOne({ _id: ObjectId(req.params.id) })
     .then(() => {
       res.json({ message: 'OK' });

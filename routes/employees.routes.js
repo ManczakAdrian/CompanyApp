@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./../db');
+//const db = require('./../db');
+
+const ObjectId = require('mongodb').ObjectId;
 
 router.get('/employees', (req, res) => {
   req.db.collection('employees')
@@ -44,9 +46,7 @@ router.get('/employees/:id', (req, res) => {
 router.post('/employees', (req, res) => {
   const { firstName, lastName } = req.body;
   req.db.collection('employees')
-  .insertOne({ firstName: name })
-  .insertOne({ lastName: name })
-
+  .insertOne({ name: name })
   .then(() => {
     res.json({ message: 'OK' });
   })
@@ -73,7 +73,7 @@ router.put('/employees/:id', (req, res) => {
 
 router.delete('/employees/:id', (req, res) => {
   const { firstName, lastName } = req.body;
-  req.db.collection('departments')
+  req.db.collection('employees')
   .deleteOne({ _id: ObjectId(req.params.id) })
   .then(() => {
     res.json({ message: 'OK' });
