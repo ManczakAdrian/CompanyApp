@@ -84,7 +84,7 @@ router.delete('/departments/:id', (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({ message: err });
-    })
+    });
 
 
   // db = db.departments.filter(item => item.id != req.params.id)
