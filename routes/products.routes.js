@@ -49,7 +49,7 @@ router.get('/products/:id', (req, res) => {
 router.post('/products', (req, res) => {
   const { name, client } = req.body;
   req.db.collection('products')
-  .insertOne({ name: name })
+  .insertOne({ name: name, client:client })
   .then(() => {
     res.json({ message: 'OK' });
   })
@@ -63,7 +63,7 @@ router.post('/products', (req, res) => {
 router.put('/products/:id', (req, res) => {
   const { name, client } = req.body;
   req.db.collection('products')
-  .updateOne({ _id: ObjectId(req.params.id) }, { $set: { name: name }})
+  .updateOne({ _id: ObjectId(req.params.id) }, { $set: { name: name, client:client }})
   .then(() => {
     res.json({ message: 'OK' });
   })
@@ -76,7 +76,7 @@ router.put('/products/:id', (req, res) => {
 });
 
 router.delete('/products/:id', (req, res) => {
-  const { name, client } = req.body;
+  //const { name, client } = req.body;
   req.db.collection('products')
     .deleteOne({ _id: ObjectId(req.params.id) })
     .then(() => {

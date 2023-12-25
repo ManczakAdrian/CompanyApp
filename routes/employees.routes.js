@@ -44,9 +44,10 @@ router.get('/employees/:id', (req, res) => {
 });
 
 router.post('/employees', (req, res) => {
-  const { firstName, lastName } = req.body;
+  const { firstName, lastName,department  } = req.body;
   req.db.collection('employees')
-  .insertOne({ name: name })
+  .insertOne({ firstName: firstName,lastName: lastName, department:department })
+  
   .then(() => {
     res.json({ message: 'OK' });
   })
@@ -58,9 +59,9 @@ router.post('/employees', (req, res) => {
 });
 
 router.put('/employees/:id', (req, res) => {
-  const { firstName, lastName } = req.body;
+  const { firstName, lastName,department  } = req.body;
   req.db.collection('employees')
-  .updateOne({ _id: ObjectId(req.params.id) }, { $set: { name: name }})
+  .updateOne({ _id: ObjectId(req.params.id) }, { $set: { firstName: firstName,lastName: lastName, department:department  }})
   .then(() => {
     res.json({ message: 'OK' });
   })
@@ -72,7 +73,7 @@ router.put('/employees/:id', (req, res) => {
 });
 
 router.delete('/employees/:id', (req, res) => {
-  const { firstName, lastName } = req.body;
+  //const { firstName, lastName } = req.body;
   req.db.collection('employees')
   .deleteOne({ _id: ObjectId(req.params.id) })
   .then(() => {
