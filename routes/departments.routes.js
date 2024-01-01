@@ -5,7 +5,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 const mongoose = require('mongoose');
 
-const Department = require('../models/department.model');
+//const Department = require('../models/department.model');
 
 
 const departmentSchema = new mongoose.Schema({
